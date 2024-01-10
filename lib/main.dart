@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         onGenerateRoute: onGenerate,
-        initialRoute: AppRoutes.signUpPage,
+        initialRoute: AppRoutes.bottomNavBar,
       ),
     );
   }

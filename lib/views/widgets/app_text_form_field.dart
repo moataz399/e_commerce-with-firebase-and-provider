@@ -16,11 +16,14 @@ class AppTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final  double? borderRadius;
   final Color? backgroundColor;
+  final FocusNode? focusNode;
   final TextEditingController? controller;
   final Function(String?) validator;
+  final VoidCallback? onEditingComplete;
 
   const AppTextFormField({
     super.key,
+    this.focusNode,
     this.contentPadding,
     this.focusedBorder,
     this.enabledBorder,
@@ -32,12 +35,15 @@ class AppTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.backgroundColor,
     this.controller,
+    this.onEditingComplete,
     required this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onEditingComplete:onEditingComplete ,
+      focusNode: focusNode,
       controller: controller,
       decoration: InputDecoration(
         isDense: true,
