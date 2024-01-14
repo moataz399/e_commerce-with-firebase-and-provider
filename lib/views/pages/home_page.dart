@@ -1,9 +1,11 @@
+import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/utils/theming/font_weight_helper.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/list_item_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final dataBase = Provider.of<Database>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +58,7 @@ class HomePage extends StatelessWidget {
                                 fontWeight: FontWeightHelper.extraBold)),
                         Text("Super summer sale",
                             style: TextStyles.font11greyRegular.copyWith(
-                              color: Color(0xFF9B9B9B),
+                              color: const Color(0xFF9B9B9B),
                             )),
                       ],
                     ),
@@ -65,7 +68,7 @@ class HomePage extends StatelessWidget {
                       },
                       child: Text("View all ",
                           style: TextStyles.font11greyRegular.copyWith(
-                            color: Color(0xFF222222),
+                            color: const Color(0xFF222222),
                           )),
                     ),
                   ],
@@ -75,17 +78,32 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 300.h,
-                  child: ListView(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: dummyProducts
-                        .map((e) => Padding(
+                  child: StreamBuilder<List<Product>>(
+                      stream: dataBase.salesProductsStream(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          final products = snapshot.data;
+                          if (products == null || products.isEmpty) {
+                            return const Center(
+                                child: Text("no data available"));
+                          }
+                          return ListView.builder(
+                            itemCount: products.length,
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, int index) => Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: ListItemHome(product: e),
-                            ))
-                        .toList(),
-                  ),
+                              child: ListItemHome(product: products[index]),
+                            ),
+                          );
+                        }
+                        return const Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.red,
+                        ));
+                      }),
                 ),
               ],
             ),
@@ -107,7 +125,7 @@ class HomePage extends StatelessWidget {
                                 fontWeight: FontWeightHelper.extraBold)),
                         Text("You’ve never seen it before!",
                             style: TextStyles.font11greyRegular.copyWith(
-                              color: Color(0xFF9B9B9B),
+                              color: const Color(0xFF9B9B9B),
                             )),
                       ],
                     ),
@@ -117,7 +135,7 @@ class HomePage extends StatelessWidget {
                       },
                       child: Text("View all ",
                           style: TextStyles.font11greyRegular.copyWith(
-                            color: Color(0xFF222222),
+                            color: const Color(0xFF222222),
                           )),
                     ),
                   ],
@@ -127,17 +145,33 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 300.h,
-                  child: ListView(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: dummyProducts
-                        .map((e) => Padding(
+                  child: StreamBuilder<List<Product>>(
+                      stream: dataBase.newProductsStream(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          final products = snapshot.data;
+                          if (products == null || products.isEmpty) {
+                            return const Center(
+                                child: Text('No data available'));
+                          }
+                          return ListView.builder(
+                            itemCount: products.length,
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, int index) => Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: ListItemHome(product: e),
-                            ))
-                        .toList(),
-                  ),
+                              child: ListItemHome(product: products[index]),
+                            ),
+                          );
+                        }
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.red,
+                          ),
+                        );
+                      }),
                 ),
               ],
             ),

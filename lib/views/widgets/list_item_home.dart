@@ -38,7 +38,7 @@ class ListItemHome extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16)),
                   child: Center(
                       child: Text(
-                    "${product.discountValue}%",
+                    "${product.discountValue }%" ,
                     style: TextStyle(
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w400,
