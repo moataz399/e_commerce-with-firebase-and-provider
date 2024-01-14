@@ -1,4 +1,8 @@
+import 'package:e_commerce/utils/routing/routes.dart';
+import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/pages/home_page.dart';
+import 'package:e_commerce/views/widgets/app_text_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -15,7 +19,26 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       PersistentTabController();
 
   List<Widget> _buildScreens() {
-    return [HomePage(), Container(),Container(),Container(),Container(),];
+    return [
+      HomePage(),
+      Container(),
+      Container(),
+      Container(),
+      Scaffold(
+        body: Center(
+          child: AppTextButton(
+            buttonText: "logout",
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              if (!mounted) return;
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutes.landingPage, (route) => false);
+            },
+            textStyle: TextStyles.font16WhiteSemiBold,
+          ),
+        ),
+      ),
+    ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {

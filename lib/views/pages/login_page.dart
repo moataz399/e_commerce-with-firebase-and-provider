@@ -1,7 +1,10 @@
+import 'package:e_commerce/services/auth.dart';
 import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import '../../controllers/auth_controller.dart';
 import '../../utils/helpers/spacing.dart';
 import '../../utils/routing/routes.dart';
 import '../../utils/theming/text_styles.dart';
@@ -24,8 +27,44 @@ class _LoginPageState extends State<LoginPage> {
 
   final passwordFocusNode = FocusNode();
 
+  Future<void> _submit(AuthController controller) async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        await controller.submitLogin(
+            email: emailController.text, password: passwordController.text);
+        if (!mounted) return;
+        Navigator.of(context).pushNamed(AppRoutes.bottomNavBar);
+      }
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                content: Text(
+                  e.toString(),
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                ),
+                title: const Text(
+                  "Error!",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.red),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    child: const Text('ok'),
+                  )
+                ],
+              ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context);
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -76,23 +115,22 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 verticalSpace(32),
-                AppTextButton(
-                  borderRadius: 8,
-                  backgroundColor: AppColors.darkRed,
-                  buttonText: "Login",
-                  textStyle: TextStyles.font16WhiteSemiBold,
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      debugPrint("validated");
-                      context.pushNamed(AppRoutes.bottomNavBar);
-
-                    }
+                Consumer<AuthController>(
+                  builder: (_, controller, __) {
+                    return AppTextButton(
+                      borderRadius: 8,
+                      backgroundColor: AppColors.darkRed,
+                      buttonText: "Login",
+                      textStyle: TextStyles.font16WhiteSemiBold,
+                      onPressed: () {
+                        _submit(controller);
+                      },
+                    );
                   },
                 ),
                 verticalSpace(16),
                 Center(child: DontHaveAccountText(function: () {
                   context.pushNamed(AppRoutes.signUpPage);
-
                 })),
                 verticalSpace(MediaQuery.of(context).size.height * 0.14),
                 Center(

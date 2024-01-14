@@ -1,5 +1,5 @@
 import 'package:e_commerce/utils/routing/routes.dart';
-import 'package:e_commerce/views/pages/bottom_nabbar.dart';
+import 'package:e_commerce/views/pages/bottom_navbar_page.dart';
 import 'package:e_commerce/views/pages/landing_page.dart';
 import 'package:e_commerce/views/pages/login_page.dart';
 import 'package:e_commerce/views/pages/register_page.dart';

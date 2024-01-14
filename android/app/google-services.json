@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1014259499692",
+    "project_id": "e-commerce-1cd97",
+    "storage_bucket": "e-commerce-1cd97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014259499692:android:d2cf158f07a96372871509",
+        "android_client_info": {
+          "package_name": "com.moataz.flutter_ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOqOldkNJirqkEf6tnl-9loXDiOmO18oY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
