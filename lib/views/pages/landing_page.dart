@@ -20,11 +20,12 @@ class LandingPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           final user = snapshot.data;
           if (user == null) {
-            return ChangeNotifierProvider<AuthController>.value(
-                value: AuthController(auth: auth), child: const LoginPage());
+            return ChangeNotifierProvider<AuthController>(
+                create: (context) => AuthController(auth: auth),
+                child: const LoginPage());
           }
           return ChangeNotifierProvider<AuthController>(
-            create: (_) => AuthController(auth: auth),
+            create: (context) => AuthController(auth: auth),
             child: Provider<Database>(
                 create: (_) => FireStoreDatabase(user.uid),
                 child: const BottomNavBarPage()),

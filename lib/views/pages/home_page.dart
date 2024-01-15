@@ -7,12 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     final dataBase = Provider.of<Database>(context);
     return SingleChildScrollView(
       child: Column(
@@ -37,7 +40,7 @@ class HomePage extends StatelessWidget {
               ),
               Padding(
                 padding:
-                    EdgeInsets.symmetric(horizontal: 14.0.w, vertical: 15.h),
+                EdgeInsets.symmetric(horizontal: 14.0.w, vertical: 15.h),
                 child: Text("Street Clothes ",
                     style: TextStyles.font34WhiteExtraBold),
               ),
@@ -57,7 +60,7 @@ class HomePage extends StatelessWidget {
                             style: TextStyles.font34BlackBold.copyWith(
                                 fontWeight: FontWeightHelper.extraBold)),
                         Text("Super summer sale",
-                            style: TextStyles.font11greyRegular.copyWith(
+                            style: TextStyles.font11greySemiBold.copyWith(
                               color: const Color(0xFF9B9B9B),
                             )),
                       ],
@@ -65,9 +68,10 @@ class HomePage extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         //  context.pushNamed(AppRoutes.pageName);
+                       // context.pushNamed(AppRoutes.productDetails);
                       },
                       child: Text("View all ",
-                          style: TextStyles.font11greyRegular.copyWith(
+                          style: TextStyles.font11greySemiBold.copyWith(
                             color: const Color(0xFF222222),
                           )),
                     ),
@@ -93,16 +97,17 @@ class HomePage extends StatelessWidget {
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, int index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListItemHome(product: products[index]),
-                            ),
+                            itemBuilder: (context, int index) =>
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListItemHome(product: products[index]),
+                                ),
                           );
                         }
                         return const Center(
                             child: CircularProgressIndicator(
-                          color: Colors.red,
-                        ));
+                              color: Colors.red,
+                            ));
                       }),
                 ),
               ],
@@ -124,7 +129,7 @@ class HomePage extends StatelessWidget {
                             style: TextStyles.font34BlackBold.copyWith(
                                 fontWeight: FontWeightHelper.extraBold)),
                         Text("You’ve never seen it before!",
-                            style: TextStyles.font11greyRegular.copyWith(
+                            style: TextStyles.font11greySemiBold.copyWith(
                               color: const Color(0xFF9B9B9B),
                             )),
                       ],
@@ -134,7 +139,7 @@ class HomePage extends StatelessWidget {
                         //  context.pushNamed(AppRoutes.pageName);
                       },
                       child: Text("View all ",
-                          style: TextStyles.font11greyRegular.copyWith(
+                          style: TextStyles.font11greySemiBold.copyWith(
                             color: const Color(0xFF222222),
                           )),
                     ),
@@ -160,10 +165,11 @@ class HomePage extends StatelessWidget {
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, int index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListItemHome(product: products[index]),
-                            ),
+                            itemBuilder: (context, int index) =>
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListItemHome(product: products[index]),
+                                ),
                           );
                         }
                         return const Center(

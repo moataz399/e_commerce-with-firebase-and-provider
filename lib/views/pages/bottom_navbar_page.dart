@@ -6,6 +6,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
+
+import '../../controllers/database_controller.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({super.key});
@@ -20,7 +23,10 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   List<Widget> _buildScreens() {
     return [
-      HomePage(),
+      Provider<Database>(
+          create: (_) =>
+              FireStoreDatabase(FirebaseAuth.instance.currentUser!.uid),
+          child: const HomePage()),
       Container(),
       Container(),
       Container(),
@@ -30,7 +36,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
             buttonText: "logout",
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              if (!mounted) return;
               Navigator.of(context).pushNamedAndRemoveUntil(
                   AppRoutes.landingPage, (route) => false);
             },
