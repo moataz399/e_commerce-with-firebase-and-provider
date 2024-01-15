@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/theming/colors.dart';
+import '../widgets/drop_down_menu.dart';
 
 class ProductDetails extends StatefulWidget {
   final Product product;
@@ -15,6 +16,8 @@ class ProductDetails extends StatefulWidget {
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
 }
+
+late String dropdownValue;
 
 class _ProductDetailsState extends State<ProductDetails> {
   bool isFavorite = false;
@@ -49,22 +52,33 @@ class _ProductDetailsState extends State<ProductDetails> {
               fit: BoxFit.cover,
               width: double.infinity,
             ),
-            verticalSpace(8),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          isFavorite = !isFavorite;
-                        });
-                      },
-                      child: SizedBox(
-                        width: 50.w,
-                        height: 50.h,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 60,
+                          child: DropDownMenuComponent(
+                            items: const ['S', 'M', 'L', 'XL', 'XXL'],
+                            hint: 'Size',
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValue = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            isFavorite = !isFavorite;
+                          });
+                        },
                         child: DecoratedBox(
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
@@ -79,9 +93,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  verticalSpace(0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +125,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       buttonText: "ADD TO CART",
                       backgroundColor: AppColors.darkRed,
                       textStyle: TextStyles.font14WhiteMedium,
-                      onPressed: () {})
+                      onPressed: () {}),
                 ],
               ),
             )

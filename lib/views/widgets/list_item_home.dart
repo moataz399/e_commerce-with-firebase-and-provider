@@ -2,9 +2,11 @@ import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../models/product_model.dart';
+import '../../utils/theming/colors.dart';
 
 class ListItemHome extends StatelessWidget {
   final Product product;
@@ -13,6 +15,7 @@ class ListItemHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true)
@@ -41,7 +44,7 @@ class ListItemHome extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: product.discountValue == 0
                             ? Colors.black
-                            : Colors.red,
+                            : AppColors.darkRed,
                         borderRadius: BorderRadius.circular(16)),
                     child: Center(
                         child: Text(
@@ -58,7 +61,59 @@ class ListItemHome extends StatelessWidget {
                     )),
                   ),
                 ),
-              )
+              ),
+              Positioned(
+                left: size.width * 0.43,
+                bottom: size.height * 0.0,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 5,
+                        color: Colors.grey,
+                        spreadRadius: 2,
+                      )
+                    ],
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 20.0,
+                    child: InkWell(
+                      onTap: () {
+                        debugPrint('tapped');
+                        debugPrint(product.rate.toString());
+                      },
+                      child: Icon(
+                        Icons.favorite,
+                        size: 20.0,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          verticalSpace(8),
+          Row(
+            children: [
+              RatingBarIndicator(
+                itemSize: 25.0,
+                rating: product.rate?.toDouble() ?? 0.0,
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                direction: Axis.horizontal,
+              ),
+              const SizedBox(width: 4.0),
+              Text(
+                '(100)',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Colors.grey,
+                    ),
+              ),
             ],
           ),
           verticalSpace(8),
