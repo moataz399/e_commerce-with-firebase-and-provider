@@ -1,3 +1,4 @@
+import 'package:e_commerce/models/user_model.dart';
 import 'package:e_commerce/services/firestore_services.dart';
 import 'package:e_commerce/utils/constants/api_path.dart';
 
@@ -7,6 +8,8 @@ abstract class Database {
   Stream<List<Product>> salesProductsStream();
 
   Stream<List<Product>> newProductsStream();
+
+  Future<void> setUserData(UserData userData);
 }
 
 class FireStoreDatabase implements Database {
@@ -29,5 +32,11 @@ class FireStoreDatabase implements Database {
         path: ApiPath.products(),
         queryBuilder: (query) => query.where("discountValue", isEqualTo: 0),
         builder: (data, documentId) => Product.fromMap(data!, documentId));
+  }
+
+  @override
+  Future<void> setUserData(UserData userData) async {
+    return await _service.setData(
+        path: ApiPath.users(userData.uId), data: userData.toMap());
   }
 }

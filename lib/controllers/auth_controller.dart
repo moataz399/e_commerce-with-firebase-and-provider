@@ -1,9 +1,14 @@
+import 'package:e_commerce/models/user_model.dart';
+import 'package:e_commerce/services/firestore_services.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../services/auth.dart';
+import '../utils/constants/strings.dart';
+import 'database_controller.dart';
 
 class AuthController with ChangeNotifier {
   final AuthBase auth;
+  final database = FireStoreDatabase("123");
 
   String email;
   String password;
@@ -24,6 +29,8 @@ class AuthController with ChangeNotifier {
       {required String email, required String password}) async {
     try {
       await auth.signUpWithEmailAndPassword(email, password);
+      await database
+          .setUserData(UserData(uId: documentIdFromLocalData(), email: email));
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
