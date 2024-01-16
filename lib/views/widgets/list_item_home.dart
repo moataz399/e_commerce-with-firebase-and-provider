@@ -1,9 +1,11 @@
+import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/product_model.dart';
 import '../../utils/theming/colors.dart';
@@ -16,10 +18,12 @@ class ListItemHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final database = Provider.of<Database>(context);
     return InkWell(
       onTap: () {
-        Navigator.of(context, rootNavigator: true)
-            .pushNamed(AppRoutes.productDetails, arguments: product);
+        Navigator.of(context, rootNavigator: true).pushNamed(
+            AppRoutes.productDetails,
+            arguments: {"product": product, "database": database});
       },
       child: DecoratedBox(
         decoration: const BoxDecoration(),

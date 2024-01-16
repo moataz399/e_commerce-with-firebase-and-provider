@@ -1,5 +1,6 @@
 import 'package:e_commerce/models/user_model.dart';
 import 'package:e_commerce/services/firestore_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../services/auth.dart';
@@ -30,7 +31,7 @@ class AuthController with ChangeNotifier {
     try {
       await auth.signUpWithEmailAndPassword(email, password);
       await database
-          .setUserData(UserData(uId: documentIdFromLocalData(), email: email));
+          .setUserData(UserData(uId: auth.currentUser!.uid, email: email));
     } catch (e) {
       debugPrint(e.toString());
       rethrow;

@@ -1,9 +1,14 @@
+import 'package:e_commerce/controllers/database_controller.dart';
+import 'package:e_commerce/models/add_to_cart_model.dart';
 import 'package:e_commerce/models/product_model.dart';
+import 'package:e_commerce/utils/constants/strings.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
+import 'package:e_commerce/views/widgets/main_dailog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/theming/colors.dart';
 import '../widgets/drop_down_menu.dart';
@@ -22,9 +27,28 @@ late String dropdownValue;
 class _ProductDetailsState extends State<ProductDetails> {
   bool isFavorite = false;
 
+  Future<void> _addToCart(Database database) async {
+    try {
+      await database.addToCart(AddToCartModel(
+          productId: widget.product.id,
+          id: documentIdFromLocalData(),
+          title: widget.product.title,
+          imgUrl: widget.product.imgUrl,
+          size: dropdownValue,
+          price: widget.product.price));
+    } catch (e) {
+      MainDialog(
+              title: "Error",
+              context: context,
+              content: "failed adding to cart ")
+          .showAlertDialog();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final database = Provider.of<Database>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -122,10 +146,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   verticalSpace(20),
                   AppTextButton(
-                      buttonText: "ADD TO CART",
-                      backgroundColor: AppColors.darkRed,
-                      textStyle: TextStyles.font14WhiteMedium,
-                      onPressed: () {}),
+                    buttonText: "ADD TO CART",
+                    backgroundColor: AppColors.darkRed,
+                    textStyle: TextStyles.font14WhiteMedium,
+                    onPressed: () => _addToCart(database),
+                  ),
                 ],
               ),
             )
