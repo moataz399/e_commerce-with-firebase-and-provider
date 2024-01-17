@@ -8,6 +8,8 @@ import '../models/product_model.dart';
 abstract class Database {
   Stream<List<Product>> salesProductsStream();
 
+  Stream<List<AddToCartModel>> myProductsCart();
+
   Stream<List<Product>> newProductsStream();
 
   Future<void> setUserData(UserData userData);
@@ -48,5 +50,13 @@ class FireStoreDatabase implements Database {
     return _service.setData(
         path: ApiPath.AddToCart(uId, addToCartModel.id),
         data: addToCartModel.toMap());
+  }
+
+  @override
+  Stream<List<AddToCartModel>> myProductsCart() {
+    return _service.collectionStream(
+        path: ApiPath.myCart(uId),
+        builder: (data, documentId) =>
+            AddToCartModel.fromMap(data!, documentId));
   }
 }

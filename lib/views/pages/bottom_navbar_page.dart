@@ -1,5 +1,6 @@
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
+import 'package:e_commerce/views/pages/cart_page.dart';
 import 'package:e_commerce/views/pages/home_page.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,11 +24,11 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   List<Widget> _buildScreens() {
     return [
+      const CartPage(),
       Provider<Database>(
           create: (_) =>
               FireStoreDatabase(FirebaseAuth.instance.currentUser!.uid),
           child: const HomePage()),
-      Container(),
       Container(),
       Container(),
       Scaffold(

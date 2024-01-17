@@ -16,6 +16,7 @@ class Assets {
   static const String modelsProductModel = 'lib/models/product_model.dart';
   static const String modelsUserModel = 'lib/models/user_model.dart';
   static const String pagesBottomNavbarPage = 'lib/views/pages/bottom_navbar_page.dart';
+  static const String pagesCartPage = 'lib/views/pages/cart_page.dart';
   static const String pagesHomePage = 'lib/views/pages/home_page.dart';
   static const String pagesLandingPage = 'lib/views/pages/landing_page.dart';
   static const String pagesLoginPage = 'lib/views/pages/login_page.dart';
@@ -28,10 +29,11 @@ class Assets {
   static const String themingColors = 'lib/utils/theming/colors.dart';
   static const String themingFontWeightHelper = 'lib/utils/theming/font_weight_helper.dart';
   static const String themingTextStyles = 'lib/utils/theming/text_styles.dart';
-  //static const String widgetsAlreadyHaveAn accountRegister = 'lib/views/widgets/already_have_an account_register.dart';
+  // static const String widgetsAlreadyHaveAn accountRegister = 'lib/views/widgets/already_have_an account_register.dart';
   static const String widgetsAppTextButton = 'lib/views/widgets/app_text_button.dart';
   static const String widgetsAppTextFormField = 'lib/views/widgets/app_text_form_field.dart';
   static const String widgetsBigText = 'lib/views/widgets/big_text.dart';
+  static const String widgetsCartListItem = 'lib/views/widgets/cart_list_item.dart';
   static const String widgetsCustomAppBar = 'lib/views/widgets/custom_app_bar.dart';
   static const String widgetsDontHaveAnAccount = 'lib/views/widgets/dont_have_an_account.dart';
   static const String widgetsDropDownMenu = 'lib/views/widgets/drop_down_menu.dart';

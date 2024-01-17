@@ -1,10 +1,7 @@
 import 'package:e_commerce/models/user_model.dart';
-import 'package:e_commerce/services/firestore_services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../services/auth.dart';
-import '../utils/constants/strings.dart';
 import 'database_controller.dart';
 
 class AuthController with ChangeNotifier {
