@@ -1,5 +1,6 @@
 import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/add_to_cart_model.dart';
+import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/routing/routes.dart';
 import '../../utils/theming/colors.dart';
 import '../widgets/cart_list_item.dart';
 
@@ -112,7 +114,10 @@ class _CartPageState extends State<CartPage> {
                             buttonText: "CHECK OUT",
                             backgroundColor: AppColors.darkRed,
                             textStyle: TextStyles.font14WhiteMedium,
-                            onPressed: () {}),
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushNamed(AppRoutes.checkOutPage);
+                            }),
                         verticalSpace(27),
                       ],
                     ),

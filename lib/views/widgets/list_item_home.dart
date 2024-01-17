@@ -132,7 +132,7 @@ class ListItemHome extends StatelessWidget {
           horizontalSpace(6),
           Text(
             "${product.price}\$",
-            style: TextStyles.font14RedMedium,
+            style: TextStyles.font14DarkRedMedium,
           )
         ]),
       ),

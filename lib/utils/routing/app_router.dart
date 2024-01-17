@@ -2,6 +2,7 @@ import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/views/pages/bottom_navbar_page.dart';
+import 'package:e_commerce/views/pages/checkout_page.dart';
 import 'package:e_commerce/views/pages/landing_page.dart';
 import 'package:e_commerce/views/pages/login_page.dart';
 import 'package:e_commerce/views/pages/product_details.dart';
@@ -34,6 +35,11 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const LoginPage(),
+      );
+    case AppRoutes.checkOutPage:
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (_) => const CheckOutPage(),
       );
     case AppRoutes.signUpPage:
       return MaterialPageRoute(

@@ -144,10 +144,10 @@ class TextStyles {
     fontWeight: FontWeightHelper.regular,
     color: Colors.black,
   );
-  static TextStyle font14RedMedium = TextStyle(
+  static TextStyle font14DarkRedMedium = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.medium,
-    color: Colors.red,
+    color: AppColors.darkRed,
   );
   static TextStyle font24BlueBold = TextStyle(
     fontSize: 24.sp,

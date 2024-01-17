@@ -11,12 +11,19 @@ class CartListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 5.h),
-      child: Card(
-        color: Colors.white,
-        elevation: 0.5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
+      child: Container(
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shadows: const [
+            BoxShadow(
+              color: Color(0x14000000),
+              blurRadius: 25,
+              offset: Offset(0, 1),
+              spreadRadius: 0,
+            )
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

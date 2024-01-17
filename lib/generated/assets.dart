@@ -2,6 +2,14 @@
 class Assets {
   Assets._();
 
+  static const String assetsCard = 'assets/card.jpeg';
+  static const String assetsFedex = 'assets/fedex.png';
+  static const String assetsMasterCard = 'assets/master_card.jpg';
+  static const String checkOutCheckOutOrderDetails = 'lib/views/widgets/check_out/check_out_order_details.dart';
+  static const String checkOutDeliveryMethod = 'lib/views/widgets/check_out/delivery_method.dart';
+  static const String checkOutOrderSummaryComponent = 'lib/views/widgets/check_out/order_summary_component.dart';
+  static const String checkOutPaymentComponent = 'lib/views/widgets/check_out/payment_component.dart';
+  static const String checkOutShipingAddressComponent = 'lib/views/widgets/check_out/shiping_address_component.dart';
   static const String constantsApiPath = 'lib/utils/constants/api_path.dart';
   static const String constantsStrings = 'lib/utils/constants/strings.dart';
   static const String controllersAuthController = 'lib/controllers/auth_controller.dart';
@@ -17,6 +25,7 @@ class Assets {
   static const String modelsUserModel = 'lib/models/user_model.dart';
   static const String pagesBottomNavbarPage = 'lib/views/pages/bottom_navbar_page.dart';
   static const String pagesCartPage = 'lib/views/pages/cart_page.dart';
+  static const String pagesCheckoutPage = 'lib/views/pages/checkout_page.dart';
   static const String pagesHomePage = 'lib/views/pages/home_page.dart';
   static const String pagesLandingPage = 'lib/views/pages/landing_page.dart';
   static const String pagesLoginPage = 'lib/views/pages/login_page.dart';
@@ -29,7 +38,6 @@ class Assets {
   static const String themingColors = 'lib/utils/theming/colors.dart';
   static const String themingFontWeightHelper = 'lib/utils/theming/font_weight_helper.dart';
   static const String themingTextStyles = 'lib/utils/theming/text_styles.dart';
-  // static const String widgetsAlreadyHaveAn accountRegister = 'lib/views/widgets/already_have_an account_register.dart';
   static const String widgetsAppTextButton = 'lib/views/widgets/app_text_button.dart';
   static const String widgetsAppTextFormField = 'lib/views/widgets/app_text_form_field.dart';
   static const String widgetsBigText = 'lib/views/widgets/big_text.dart';
