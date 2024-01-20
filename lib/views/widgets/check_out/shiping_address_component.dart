@@ -1,3 +1,4 @@
+import 'package:e_commerce/models/shipping_address.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/theming/text_styles.dart';
 
 class ShippingAddressComponent extends StatelessWidget {
-  const ShippingAddressComponent({super.key});
+  const ShippingAddressComponent(
+      {super.key, required this.shippingAddressModel});
+
+  final ShippingAddressModel shippingAddressModel;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class ShippingAddressComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Moataz mohamed',
+                  shippingAddressModel.fullName,
                   style: TextStyles.font14BlackRegular,
                 ),
                 TextButton(
@@ -40,7 +44,9 @@ class ShippingAddressComponent extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: Text(
                     'Change',
                     style: TextStyles.font14DarkRedMedium,

@@ -23,7 +23,9 @@ class Assets {
   static const String modelsAddToCartModel = 'lib/models/add_to_cart_model.dart';
   static const String modelsDeliveryMethod = 'lib/models/delivery_method.dart';
   static const String modelsProductModel = 'lib/models/product_model.dart';
+  static const String modelsShippingAddress = 'lib/models/shipping_address.dart';
   static const String modelsUserModel = 'lib/models/user_model.dart';
+  static const String pagesAddShippingAddressPage = 'lib/views/pages/add_shipping_address_page.dart';
   static const String pagesBottomNavbarPage = 'lib/views/pages/bottom_navbar_page.dart';
   static const String pagesCartPage = 'lib/views/pages/cart_page.dart';
   static const String pagesCheckoutPage = 'lib/views/pages/checkout_page.dart';
@@ -32,6 +34,7 @@ class Assets {
   static const String pagesLoginPage = 'lib/views/pages/login_page.dart';
   static const String pagesProductDetails = 'lib/views/pages/product_details.dart';
   static const String pagesRegisterPage = 'lib/views/pages/register_page.dart';
+  static const String pagesShippingAddressPage = 'lib/views/pages/shipping_address_page.dart';
   static const String routingAppRouter = 'lib/utils/routing/app_router.dart';
   static const String routingRoutes = 'lib/utils/routing/routes.dart';
   static const String servicesAuth = 'lib/services/auth.dart';
@@ -39,7 +42,6 @@ class Assets {
   static const String themingColors = 'lib/utils/theming/colors.dart';
   static const String themingFontWeightHelper = 'lib/utils/theming/font_weight_helper.dart';
   static const String themingTextStyles = 'lib/utils/theming/text_styles.dart';
- // static const String widgetsAlreadyHaveAn accountRegister = 'lib/views/widgets/already_have_an account_register.dart';
   static const String widgetsAppTextButton = 'lib/views/widgets/app_text_button.dart';
   static const String widgetsAppTextFormField = 'lib/views/widgets/app_text_form_field.dart';
   static const String widgetsBigText = 'lib/views/widgets/big_text.dart';
@@ -49,6 +51,7 @@ class Assets {
   static const String widgetsDropDownMenu = 'lib/views/widgets/drop_down_menu.dart';
   static const String widgetsExpandableText = 'lib/views/widgets/expandable_text.dart';
   static const String widgetsListItemHome = 'lib/views/widgets/list_item_home.dart';
+  static const String widgetsLoadingPage = 'lib/views/widgets/loading_page.dart';
   static const String widgetsMainDailog = 'lib/views/widgets/main_dailog.dart';
   static const String widgetsSmallText = 'lib/views/widgets/small_text.dart';
   static const String widgetsSocialLogin = 'lib/views/widgets/social_login.dart';

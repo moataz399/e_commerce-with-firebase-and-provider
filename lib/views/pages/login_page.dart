@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       if (_formKey.currentState!.validate()) {
         await controller.submitLogin(
-            email: emailController.text, password: passwordController.text);
+            email: emailController.text.trim(), password: passwordController.text.trim());
         if (!mounted) return;
         Navigator.of(context).pushNamed(AppRoutes.bottomNavBar);
       }

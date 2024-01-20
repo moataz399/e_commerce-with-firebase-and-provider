@@ -1,6 +1,8 @@
 import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/delivery_method.dart';
+import 'package:e_commerce/models/shipping_address.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
+import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ import '../widgets/check_out/check_out_order_details.dart';
 import '../widgets/check_out/delivery_method.dart';
 import '../widgets/check_out/payment_component.dart';
 import '../widgets/check_out/shiping_address_component.dart';
+import '../widgets/loading_page.dart';
 
 class CheckOutPage extends StatefulWidget {
   const CheckOutPage({super.key});
@@ -43,11 +46,51 @@ class _CheckOutPageState extends State<CheckOutPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Shipping address',
+                'Shipping Address',
                 style: TextStyles.font16BlackRegular,
               ),
               verticalSpace(20.h),
-              const ShippingAddressComponent(),
+              StreamBuilder<List<ShippingAddressModel>>(
+                  stream: database.getShippingAddresses(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      final shippingAddresses = snapshot.data;
+
+                      if (shippingAddresses == null ||
+                          shippingAddresses.isEmpty) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              const Text('no shipping address!'),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  minimumSize: Size.zero,
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 26.w),
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(
+                                      AppRoutes.addShippingAddressPage,
+                                      arguments: database);
+                                },
+                                child: Text(
+                                  'Add new shipping address',
+                                  style: TextStyles.font14DarkRedMedium,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }
+
+                      return ShippingAddressComponent(
+                        shippingAddressModel: shippingAddresses[0],
+                      );
+                    }
+                    return const LoadingPage();
+                  }),
               verticalSpace(45.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
