@@ -1,43 +1,35 @@
-import 'package:e_commerce/utils/helpers/spacing.dart';
-import 'package:e_commerce/utils/theming/text_styles.dart';
+import 'package:e_commerce/models/delivery_method.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DeliveryMethodItem extends StatelessWidget {
-  const DeliveryMethodItem({super.key});
+  final DeliveryMethodModel deliveryMethodModel;
+
+  const DeliveryMethodItem({
+    Key? key,
+    required this.deliveryMethodModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin:  const EdgeInsets.all(10),
-      height: 72.h,
-      width: 100.w,
-      decoration: ShapeDecoration(
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        shadows: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 25,
-            offset: Offset(0, 1),
-            spreadRadius: 0,
-          )
-        ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            "assets/fedex.png",
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Image.network(
+            deliveryMethodModel.imgUrl,
             fit: BoxFit.cover,
-            height: 20.h,
+            height: 40,
           ),
-          verticalSpace(11),
-          Text(' 2-3 days', style: TextStyles.font11greySemiBold)
-        ],
+          const SizedBox(height: 6.0),
+          Text(
+            '${deliveryMethodModel.days} days',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ]),
       ),
     );
   }

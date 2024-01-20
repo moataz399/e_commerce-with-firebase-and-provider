@@ -1,6 +1,5 @@
 import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/add_to_cart_model.dart';
-import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
@@ -116,7 +115,8 @@ class _CartPageState extends State<CartPage> {
                             textStyle: TextStyles.font14WhiteMedium,
                             onPressed: () {
                               Navigator.of(context, rootNavigator: true)
-                                  .pushNamed(AppRoutes.checkOutPage);
+                                  .pushNamed(AppRoutes.checkOutPage,
+                                      arguments: database);
                             }),
                         verticalSpace(27),
                       ],

@@ -27,8 +27,7 @@ class AuthController with ChangeNotifier {
       {required String email, required String password}) async {
     try {
       await auth.signUpWithEmailAndPassword(email, password);
-      await database
-          .setUserData(UserData(uId: auth.currentUser!.uid, email: email));
+      await database.setUserData(UserData(uId: auth.currentUser!.uid, email: email));
     } catch (e) {
       debugPrint(e.toString());
       rethrow;

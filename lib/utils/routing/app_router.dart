@@ -37,9 +37,11 @@ Route<dynamic> onGenerate(RouteSettings settings) {
         builder: (_) => const LoginPage(),
       );
     case AppRoutes.checkOutPage:
+      final database = settings.arguments as Database;
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => const CheckOutPage(),
+        builder: (_) => Provider<Database>.value(
+            value: database, child: const CheckOutPage()),
       );
     case AppRoutes.signUpPage:
       return MaterialPageRoute(

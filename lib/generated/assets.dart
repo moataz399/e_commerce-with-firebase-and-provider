@@ -21,6 +21,7 @@ class Assets {
   static const String helpersSpacing = 'lib/utils/helpers/spacing.dart';
   static const String libMain = 'lib/main.dart';
   static const String modelsAddToCartModel = 'lib/models/add_to_cart_model.dart';
+  static const String modelsDeliveryMethod = 'lib/models/delivery_method.dart';
   static const String modelsProductModel = 'lib/models/product_model.dart';
   static const String modelsUserModel = 'lib/models/user_model.dart';
   static const String pagesBottomNavbarPage = 'lib/views/pages/bottom_navbar_page.dart';
@@ -38,6 +39,7 @@ class Assets {
   static const String themingColors = 'lib/utils/theming/colors.dart';
   static const String themingFontWeightHelper = 'lib/utils/theming/font_weight_helper.dart';
   static const String themingTextStyles = 'lib/utils/theming/text_styles.dart';
+ // static const String widgetsAlreadyHaveAn accountRegister = 'lib/views/widgets/already_have_an account_register.dart';
   static const String widgetsAppTextButton = 'lib/views/widgets/app_text_button.dart';
   static const String widgetsAppTextFormField = 'lib/views/widgets/app_text_form_field.dart';
   static const String widgetsBigText = 'lib/views/widgets/big_text.dart';

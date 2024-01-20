@@ -1,9 +1,13 @@
+import 'package:e_commerce/controllers/database_controller.dart';
+import 'package:e_commerce/models/delivery_method.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../utils/theming/colors.dart';
 import '../widgets/check_out/check_out_order_details.dart';
 import '../widgets/check_out/delivery_method.dart';
 import '../widgets/check_out/payment_component.dart';
@@ -19,6 +23,7 @@ class CheckOutPage extends StatefulWidget {
 class _CheckOutPageState extends State<CheckOutPage> {
   @override
   Widget build(BuildContext context) {
+    final database = Provider.of<Database>(context);
     return Scaffold(
       backgroundColor: const Color(0XFFF9F9F9),
       appBar: AppBar(
@@ -69,21 +74,42 @@ class _CheckOutPageState extends State<CheckOutPage> {
               const PaymentComponent(),
               verticalSpace(45.h),
               Text(
-                'Delivery method',
+                'Delivery Methods',
                 style: TextStyles.font16BlackRegular,
               ),
               verticalSpace(20.h),
-              Container(
-                color: Colors.white,
-                height: 100.h,
-                child: ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return const DeliveryMethodItem();
-                    }),
-              ),
+              StreamBuilder<List<DeliveryMethodModel>>(
+                  stream: database.deliveryMethod(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      final data = snapshot.data;
+
+                      if (data == null || data.isEmpty) {
+                        return const Center(
+                          child: Text(
+                              'delivery methods is not available right now '),
+                        );
+                      }
+                      return SizedBox(
+                        height: 125.h,
+                        child: ListView.builder(
+                            itemCount: data.length,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DeliveryMethodItem(
+                                  deliveryMethodModel: data[index],
+                                ),
+                              );
+                            }),
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  }),
               verticalSpace(45.h),
               const CheckOutOrderDetails(),
               verticalSpace(26.h),
