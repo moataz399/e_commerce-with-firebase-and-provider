@@ -84,7 +84,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           ),
                         );
                       }
-
+                      // final shippingAddress = shippingAddresses
+                      //     .firstWhere((element) => element.isDefault == true);
                       return ShippingAddressComponent(
                         shippingAddressModel: shippingAddresses[0],
                       );

@@ -44,9 +44,7 @@ class ShippingAddressComponent extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   child: Text(
                     'Change',
                     style: TextStyles.font14DarkRedMedium,
@@ -56,11 +54,11 @@ class ShippingAddressComponent extends StatelessWidget {
             ),
             verticalSpace(6),
             Text(
-              '3 Newbridge Court',
+              shippingAddressModel.address,
               style: TextStyles.font14BlackRegular,
             ),
             Text(
-              'Chino Hills, CA 91709, United States',
+              '${shippingAddressModel.city},${shippingAddressModel.state},${shippingAddressModel.country}',
               style: TextStyles.font14BlackRegular,
             ),
           ],
