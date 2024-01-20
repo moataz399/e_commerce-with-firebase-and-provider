@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
             email: emailController.text.trim(),
             password: passwordController.text.trim());
         if (!mounted) return;
-        Navigator.of(context).pushNamed(AppRoutes.bottomNavBar);
+        Navigator.of(context).pushNamed(Routes.bottomNavBar);
       }
     } catch (e) {
       showDialog(

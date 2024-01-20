@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../utils/theming/colors.dart';
 import '../widgets/check_out/check_out_order_details.dart';
 import '../widgets/check_out/delivery_method.dart';
 import '../widgets/check_out/payment_component.dart';
@@ -72,7 +71,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).pushNamed(
-                                      AppRoutes.addShippingAddressPage,
+                                      Routes.addShippingAddressPage,
                                       arguments: database);
                                 },
                                 child: Text(
@@ -88,6 +87,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       //     .firstWhere((element) => element.isDefault == true);
                       return ShippingAddressComponent(
                         shippingAddressModel: shippingAddresses[0],
+                        database: database,
                       );
                     }
                     return const LoadingPage();

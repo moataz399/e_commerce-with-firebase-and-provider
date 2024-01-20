@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         await controller.submitLogin(
             email: emailController.text.trim(), password: passwordController.text.trim());
         if (!mounted) return;
-        Navigator.of(context).pushNamed(AppRoutes.bottomNavBar);
+        Navigator.of(context).pushNamed(Routes.bottomNavBar);
       }
     } catch (e) {
       showDialog(
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 verticalSpace(16),
                 Center(child: DontHaveAccountText(function: () {
-                  context.pushNamed(AppRoutes.signUpPage);
+                  context.pushNamed(Routes.signUpPage);
                 })),
                 verticalSpace(MediaQuery.of(context).size.height * 0.14),
                 Center(

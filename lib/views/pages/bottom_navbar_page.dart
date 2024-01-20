@@ -38,7 +38,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
               Navigator.of(context).pushNamedAndRemoveUntil(
-                  AppRoutes.landingPage, (route) => false);
+                  Routes.landingPage, (route) => false);
             },
             textStyle: TextStyles.font16WhiteSemiBold,
           ),

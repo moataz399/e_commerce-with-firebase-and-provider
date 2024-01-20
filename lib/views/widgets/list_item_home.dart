@@ -22,7 +22,7 @@ class ListItemHome extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context, rootNavigator: true).pushNamed(
-            AppRoutes.productDetails,
+            Routes.productDetails,
             arguments: {"product": product, "database": database});
       },
       child: DecoratedBox(

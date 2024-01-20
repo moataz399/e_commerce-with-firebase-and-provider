@@ -64,8 +64,6 @@ class HomePage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        //  context.pushNamed(AppRoutes.pageName);
-                        // context.pushNamed(AppRoutes.productDetails);
                       },
                       child: Text("View all ",
                           style: TextStyles.font11greySemiBold.copyWith(

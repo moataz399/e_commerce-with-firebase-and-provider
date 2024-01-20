@@ -1,21 +1,27 @@
 import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/shipping_address.dart';
-import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/arguments/add_shipping_address_args.dart';
 import '../../../utils/routing/routes.dart';
 import '../../../utils/theming/text_styles.dart';
 
-class ShippingAddressComponent extends StatelessWidget {
-  const ShippingAddressComponent(
-      {super.key, required this.shippingAddressModel, required this.database});
+class ShippingAddressStateItem extends StatefulWidget {
+  const ShippingAddressStateItem(
+      {super.key, required this.shippingAdress, required this.database});
 
-  final ShippingAddressModel shippingAddressModel;
+  final ShippingAddressModel shippingAdress;
   final Database database;
 
+  @override
+  State<ShippingAddressStateItem> createState() =>
+      _ShippingAddressStateItemState();
+}
+
+class _ShippingAddressStateItemState extends State<ShippingAddressStateItem> {
   @override
   Widget build(BuildContext context) {
     final database = Provider.of<Database>(context);
@@ -41,7 +47,7 @@ class ShippingAddressComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  shippingAddressModel.fullName,
+                  widget.shippingAdress.fullName,
                   style: TextStyles.font14BlackRegular,
                 ),
                 TextButton(
@@ -51,11 +57,14 @@ class ShippingAddressComponent extends StatelessWidget {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    context.pushNamed(Routes.shippingAddressesPage,
-                        arguments: database);
+                    Navigator.of(context).pushNamed(
+                        Routes.addShippingAddressPage,
+                        arguments: AddShippingAddressArgs(
+                            database: database,
+                            shippingAddress: widget.shippingAdress));
                   },
                   child: Text(
-                    'Change',
+                    'Edit',
                     style: TextStyles.font14DarkRedMedium,
                   ),
                 )
@@ -63,13 +72,14 @@ class ShippingAddressComponent extends StatelessWidget {
             ),
             verticalSpace(6),
             Text(
-              shippingAddressModel.address,
+              widget.shippingAdress.address,
               style: TextStyles.font14BlackRegular,
             ),
             Text(
-              '${shippingAddressModel.city},${shippingAddressModel.state},${shippingAddressModel.country}',
+              '${widget.shippingAdress.city},${widget.shippingAdress.state},${widget.shippingAdress.country}',
               style: TextStyles.font14BlackRegular,
             ),
+            verticalSpace(8),
           ],
         ),
       ),

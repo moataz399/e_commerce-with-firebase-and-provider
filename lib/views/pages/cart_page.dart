@@ -115,7 +115,7 @@ class _CartPageState extends State<CartPage> {
                             textStyle: TextStyles.font14WhiteMedium,
                             onPressed: () {
                               Navigator.of(context, rootNavigator: true)
-                                  .pushNamed(AppRoutes.checkOutPage,
+                                  .pushNamed(Routes.checkOutPage,
                                       arguments: database);
                             }),
                         verticalSpace(27),

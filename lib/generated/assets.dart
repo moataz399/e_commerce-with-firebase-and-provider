@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String argumentsAddShippingAddressArgs = 'lib/utils/arguments/add_shipping_address_args.dart';
   static const String assetsCard = 'assets/card.jpeg';
   static const String assetsFedex = 'assets/fedex.png';
   static const String assetsMasterCard = 'assets/master_card.jpg';
@@ -10,6 +11,7 @@ class Assets {
   static const String checkOutOrderSummaryComponent = 'lib/views/widgets/check_out/order_summary_component.dart';
   static const String checkOutPaymentComponent = 'lib/views/widgets/check_out/payment_component.dart';
   static const String checkOutShipingAddressComponent = 'lib/views/widgets/check_out/shiping_address_component.dart';
+  static const String checkOutShippingAddressStateItem = 'lib/views/widgets/check_out/shipping_address_state_item.dart';
   static const String constantsApiPath = 'lib/utils/constants/api_path.dart';
   static const String constantsStrings = 'lib/utils/constants/strings.dart';
   static const String controllersAuthController = 'lib/controllers/auth_controller.dart';

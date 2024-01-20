@@ -1,5 +1,5 @@
 import 'package:e_commerce/controllers/database_controller.dart';
-import 'package:e_commerce/models/product_model.dart';
+import 'package:e_commerce/utils/arguments/add_shipping_address_args.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/views/pages/bottom_navbar_page.dart';
 import 'package:e_commerce/views/pages/checkout_page.dart';
@@ -15,21 +15,30 @@ import '../../views/pages/shipping_address_page.dart';
 
 Route<dynamic> onGenerate(RouteSettings settings) {
   switch (settings.name) {
-    case AppRoutes.landingPage:
+    ///////////////
+    case Routes.landingPage:
       return MaterialPageRoute(
         builder: (_) => const LandingPage(),
         settings: settings,
       );
-    case AppRoutes.addShippingAddressPage:
-      final database=settings.arguments as Database;
+
+    ///////////////////////////////
+
+    case Routes.addShippingAddressPage:
+      final args = settings.arguments as AddShippingAddressArgs;
+      final shippingAddress = args.shippingAddress;
+      final database = args.database;
       return MaterialPageRoute(
-        builder: (_) =>
-            Provider<Database>.value(
-                value: database,
-                child: const AddShippingAddressPage()),
+        builder: (_) => Provider<Database>.value(
+            value: database,
+            child: AddShippingAddressPage(
+              shippingAddress: shippingAddress,
+            )),
         settings: settings,
       );
-    case AppRoutes.productDetails:
+
+    ////////////////////////////////
+    case Routes.productDetails:
       final args = settings.arguments as Map<String, dynamic>;
       final product = args["product"];
       final database = args["database"];
@@ -43,30 +52,32 @@ Route<dynamic> onGenerate(RouteSettings settings) {
         ),
       );
 
-    case AppRoutes.loginPage:
+    case Routes.loginPage:
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const LoginPage(),
       );
-    case AppRoutes.shippingAddressPage:
+    case Routes.shippingAddressesPage:
+      final database = settings.arguments as Database;
       return MaterialPageRoute(
         settings: settings,
-        builder: (_) => const ShippingAddressPage(),
+        builder: (_) => Provider<Database>.value(
+            value: database, child: const ShippingAddressesPage()),
       );
-    case AppRoutes.checkOutPage:
+    case Routes.checkOutPage:
       final database = settings.arguments as Database;
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => Provider<Database>.value(
             value: database, child: const CheckOutPage()),
       );
-    case AppRoutes.signUpPage:
+    case Routes.signUpPage:
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const RegisterPage(),
       );
 
-    case AppRoutes.bottomNavBar:
+    case Routes.bottomNavBar:
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => const BottomNavBarPage(),

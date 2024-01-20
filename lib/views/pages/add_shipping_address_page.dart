@@ -13,7 +13,9 @@ import '../../utils/constants/strings.dart';
 import '../../utils/theming/text_styles.dart';
 
 class AddShippingAddressPage extends StatefulWidget {
-  const AddShippingAddressPage({super.key});
+  AddShippingAddressPage({super.key, this.shippingAddress});
+
+  ShippingAddressModel? shippingAddress;
 
   @override
   State<AddShippingAddressPage> createState() => _AddShippingAddressPageState();
@@ -27,6 +29,20 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
   TextEditingController stateController = TextEditingController();
   TextEditingController zipCodeController = TextEditingController();
   TextEditingController countryController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.shippingAddress != null) {
+      fullNameController.text = widget.shippingAddress!.fullName;
+      addressController.text = widget.shippingAddress!.address;
+      cityController.text = widget.shippingAddress!.city;
+      stateController.text = widget.shippingAddress!.state;
+      zipCodeController.text = widget.shippingAddress!.zipCode;
+      countryController.text = widget.shippingAddress!.country;
+    }
+    print('========================== ${widget.shippingAddress}');
+  }
 
   @override
   void dispose() {
@@ -43,7 +59,9 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
     try {
       if (formKey.currentState!.validate()) {
         final address = ShippingAddressModel(
-            id: documentIdFromLocalData(),
+            id: widget.shippingAddress != null
+                ? widget.shippingAddress!.id
+                : documentIdFromLocalData(),
             address: addressController.text.trim(),
             fullName: fullNameController.text.trim(),
             city: cityController.text.trim(),
@@ -71,7 +89,9 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
         elevation: 0.9,
         backgroundColor: Colors.white,
         title: Text(
-          'Adding Shipping Address',
+          widget.shippingAddress != null
+              ? "Editing Shipping Address "
+              : 'Adding Shipping Address',
           style: TextStyles.font18BlackRegular,
         ),
         centerTitle: true,
@@ -89,7 +109,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                   controller: fullNameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "please enter a your full name";
+                      return "please enter your full name";
                     }
                   },
                 ),
@@ -145,7 +165,9 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                 ),
                 verticalSpace(40),
                 AppTextButton(
-                    buttonText: "SAVE ADDRESS",
+                    buttonText: widget.shippingAddress != null
+                        ? "Update Address "
+                        : 'Save Address',
                     textStyle: TextStyles.font14WhiteMedium,
                     onPressed: () {
                       saveAddress(database);
