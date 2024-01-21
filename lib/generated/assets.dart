@@ -25,7 +25,7 @@ class Assets {
   static const String modelsAddToCartModel = 'lib/models/add_to_cart_model.dart';
   static const String modelsDeliveryMethod = 'lib/models/delivery_method.dart';
   static const String modelsProductModel = 'lib/models/product_model.dart';
-  static const String modelsShippingAddress = 'lib/models/shipping_address.dart';
+  static const String modelsShippingAddress = 'lib/models/shipping_address_model.dart';
   static const String modelsUserModel = 'lib/models/user_model.dart';
   static const String pagesAddShippingAddressPage = 'lib/views/pages/add_shipping_address_page.dart';
   static const String pagesBottomNavbarPage = 'lib/views/pages/bottom_navbar_page.dart';

@@ -1,6 +1,6 @@
 import 'package:e_commerce/models/add_to_cart_model.dart';
 import 'package:e_commerce/models/delivery_method.dart';
-import 'package:e_commerce/models/shipping_address.dart';
+import 'package:e_commerce/models/shipping_address_model.dart';
 import 'package:e_commerce/models/user_model.dart';
 import 'package:e_commerce/services/firestore_services.dart';
 import 'package:e_commerce/utils/constants/api_path.dart';

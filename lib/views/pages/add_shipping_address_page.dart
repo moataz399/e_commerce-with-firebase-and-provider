@@ -1,4 +1,4 @@
-import 'package:e_commerce/models/shipping_address.dart';
+import 'package:e_commerce/models/shipping_address_model.dart';
 import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';

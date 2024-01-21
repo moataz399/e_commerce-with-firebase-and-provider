@@ -43,4 +43,41 @@ class ShippingAddressModel {
       zipCode: map['zipCode'] as String,
     );
   }
+
+  ShippingAddressModel copyWith({
+    String? id,
+    String? address,
+    String? fullName,
+    String? city,
+    String? country,
+    String? state,
+    bool? isDefault,
+    String? zipCode,
+  }) {
+    return ShippingAddressModel(
+      id: id ?? this.id,
+      address: address ?? this.address,
+      fullName: fullName ?? this.fullName,
+      city: city ?? this.city,
+      country: country ?? this.country,
+      state: state ?? this.state,
+      isDefault: isDefault ?? this.isDefault,
+      zipCode: zipCode ?? this.zipCode,
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

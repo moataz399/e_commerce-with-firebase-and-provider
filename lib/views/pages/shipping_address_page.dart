@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/shipping_address.dart';
+import '../../models/shipping_address_model.dart';
 import '../../utils/arguments/add_shipping_address_args.dart';
 import '../../utils/routing/routes.dart';
 import '../../utils/theming/text_styles.dart';
@@ -50,7 +50,7 @@ class ShippingAddressesPage extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: ShippingAddressStateItem(
                                     database: database,
-                                    shippingAdress: shippingAddresses[index],
+                                    shippingAddress: shippingAddresses[index],
                                   ),
                                 );
                               }),
