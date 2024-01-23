@@ -1,11 +1,11 @@
 import 'package:e_commerce/controllers/auth_controller.dart';
 import 'package:e_commerce/services/auth.dart';
+import 'package:e_commerce/views/pages/auth/login_page.dart';
 import 'package:e_commerce/views/pages/bottom_navbar_page.dart';
-import 'package:e_commerce/views/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../controllers/database_controller.dart';
+import '../../../controllers/database_controller.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});

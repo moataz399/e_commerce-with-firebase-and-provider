@@ -4,13 +4,13 @@ import 'package:e_commerce/utils/theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../controllers/auth_controller.dart';
-import '../../utils/helpers/spacing.dart';
-import '../../utils/routing/routes.dart';
-import '../../utils/theming/text_styles.dart';
-import '../widgets/dont_have_an_account.dart';
-import '../widgets/app_text_button.dart';
-import '../widgets/app_text_form_field.dart';
+import '../../../controllers/auth_controller.dart';
+import '../../../utils/helpers/spacing.dart';
+import '../../../utils/routing/routes.dart';
+import '../../../utils/theming/text_styles.dart';
+import '../../widgets/app_text_button.dart';
+import '../../widgets/app_text_form_field.dart';
+import '../../widgets/auth/dont_have_an_account.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,7 +31,8 @@ class _LoginPageState extends State<LoginPage> {
     try {
       if (_formKey.currentState!.validate()) {
         await controller.submitLogin(
-            email: emailController.text.trim(), password: passwordController.text.trim());
+            email: emailController.text.trim(),
+            password: passwordController.text.trim());
         if (!mounted) return;
         Navigator.of(context).pushNamed(Routes.bottomNavBar);
       }

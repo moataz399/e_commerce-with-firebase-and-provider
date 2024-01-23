@@ -23,19 +23,6 @@ class _CartPageState extends State<CartPage> {
   int totalAmount = 0;
 
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-    final myProducts = await Provider.of<Database>(context, listen: false)
-        .myProductsCart()
-        .first;
-    myProducts.forEach((element) {
-      setState(() {
-        totalAmount += element.price;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final database = Provider.of<Database>(context);
     return SafeArea(
@@ -43,7 +30,12 @@ class _CartPageState extends State<CartPage> {
             stream: database.myProductsCart(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
-                final cartItems = snapshot.data;
+                var cartItems = snapshot.data;
+                totalAmount = 0;
+                for (var element in cartItems!) {
+                  totalAmount += element.price;
+                }
+                debugPrint(cartItems.length.toString());
                 return SingleChildScrollView(
                   child: Padding(
                     padding:
@@ -69,7 +61,7 @@ class _CartPageState extends State<CartPage> {
                           color: Colors.black,
                           size: 34,
                         ),
-                        if (cartItems == null || cartItems.isEmpty)
+                        if (cartItems.isEmpty)
                           Padding(
                             padding: EdgeInsets.symmetric(
                               vertical: 16.0.h,
@@ -78,15 +70,13 @@ class _CartPageState extends State<CartPage> {
                               child: Text("no data available"),
                             ),
                           ),
-                        if (cartItems != null && cartItems.isNotEmpty)
+                        if (cartItems.isNotEmpty)
                           ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: cartItems.length,
-                              itemBuilder: (BuildContext context, index) {
-                                final cartItem = cartItems[index];
-
-                                totalAmount += cartItem.price;
+                              itemBuilder: (BuildContext context, int index) {
+                                totalAmount += cartItems[index].price;
 
                                 return SizedBox(
                                   child: CartListItem(
@@ -95,29 +85,31 @@ class _CartPageState extends State<CartPage> {
                                 );
                               }),
                         verticalSpace(16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total amount:',
-                              style: TextStyles.font14GrayRegular,
-                            ),
-                            Text(
-                              '$totalAmount\$',
-                              style: TextStyles.font18BlackRegular,
-                            )
-                          ],
-                        ),
+                        if (totalAmount != 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Total amount:',
+                                style: TextStyles.font14GrayRegular,
+                              ),
+                              Text(
+                                '$totalAmount\$',
+                                style: TextStyles.font18BlackRegular,
+                              )
+                            ],
+                          ),
                         verticalSpace(16),
-                        AppTextButton(
-                            buttonText: "CHECK OUT",
-                            backgroundColor: AppColors.darkRed,
-                            textStyle: TextStyles.font14WhiteMedium,
-                            onPressed: () {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pushNamed(Routes.checkOutPage,
-                                      arguments: database);
-                            }),
+                        if (totalAmount != 0)
+                          AppTextButton(
+                              buttonText: "CHECK OUT",
+                              backgroundColor: AppColors.darkRed,
+                              textStyle: TextStyles.font14WhiteMedium,
+                              onPressed: () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamed(Routes.checkOutPage,
+                                        arguments: database);
+                              }),
                         verticalSpace(27),
                       ],
                     ),

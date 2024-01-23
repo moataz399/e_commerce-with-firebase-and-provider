@@ -1,5 +1,6 @@
 import 'package:e_commerce/models/add_to_cart_model.dart';
 import 'package:e_commerce/models/delivery_method.dart';
+import 'package:e_commerce/models/fav_model.dart';
 import 'package:e_commerce/models/shipping_address_model.dart';
 import 'package:e_commerce/models/user_model.dart';
 import 'package:e_commerce/services/firestore_services.dart';
@@ -12,9 +13,11 @@ abstract class Database {
 
   Stream<List<AddToCartModel>> myProductsCart();
 
+  Stream<List<Product>> myFavProducts();
+
   Stream<List<Product>> newProductsStream();
 
-  Stream<List<DeliveryMethodModel>> deliveryMethod();
+  Stream<List<DeliveryMethodModel>> deliveryMethods();
 
   Stream<List<ShippingAddressModel>> getShippingAddresses();
 
@@ -22,7 +25,13 @@ abstract class Database {
 
   Future<void> saveAddress(ShippingAddressModel shippingAddressModel);
 
+  Future<void> deleteItem(AddToCartModel model);
+
+  Future<void> deleteFavItem(Product model);
+
   Future<void> addToCart(AddToCartModel model);
+
+  Future<void> addToFav(Product model);
 }
 
 class FireStoreDatabase implements Database {
@@ -63,13 +72,13 @@ class FireStoreDatabase implements Database {
   @override
   Stream<List<AddToCartModel>> myProductsCart() {
     return _service.collectionStream(
-        path: ApiPath.myCart(uId),
+        path: ApiPath.myCart(uId: uId),
         builder: (data, documentId) =>
             AddToCartModel.fromMap(data!, documentId));
   }
 
   @override
-  Stream<List<DeliveryMethodModel>> deliveryMethod() {
+  Stream<List<DeliveryMethodModel>> deliveryMethods() {
     return _service.collectionStream(
         path: ApiPath.deliveryMethods(),
         builder: (data, documentId) =>
@@ -88,5 +97,29 @@ class FireStoreDatabase implements Database {
   Future<void> saveAddress(ShippingAddressModel address) async {
     return await _service.setData(
         path: ApiPath.newAddress(uId, address.id), data: address.toMap());
+  }
+
+  @override
+  Future<void> deleteItem(AddToCartModel model) async {
+    return await _service.deleteData(
+        path: ApiPath.deleteCartItem(uId, model.id));
+  }
+
+  @override
+  Future<void> addToFav(Product model) async {
+    return await _service.setData(
+        path: ApiPath.addToFav(uId, model.id), data: model.toMap());
+  }
+
+  @override
+  Stream<List<Product>> myFavProducts() {
+    return _service.collectionStream(
+        path: ApiPath.myFav(uId: uId),
+        builder: (data, documentId) => Product.fromMap(data!, documentId));
+  }
+
+  @override
+  Future<void> deleteFavItem(Product model) async {
+    await _service.deleteData(path: ApiPath.deleteFavItem(uId, model.id));
   }
 }

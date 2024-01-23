@@ -6,7 +6,10 @@ class Routes {
   static const String homePage = '/homePage';
   static const String productDetails = '/productDetails';
   static const String checkOutPage = '/checkOutPage';
+  static const String paymentMethodsPage = '/paymentMethodsPage';
   static const String shippingAddressesPage = '/shippingAddressesPage';
+  static const String profilePage = '/profile';
+  static const String favPage = '/favPage';
   static const String addShippingAddressPage =
       '/checkOut/addShippingAddressPage';
 }

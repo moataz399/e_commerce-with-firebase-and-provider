@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/theming/text_styles.dart';
+import '../../../utils/theming/text_styles.dart';
 
 class DontHaveAccountText extends StatelessWidget {
   DontHaveAccountText({super.key, required this.function});

@@ -1,19 +1,20 @@
 import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/delivery_method.dart';
 import 'package:e_commerce/models/shipping_address_model.dart';
+import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
+import 'package:e_commerce/views/widgets/check_out/shiping_address_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/check_out/check_out_order_details.dart';
-import '../widgets/check_out/delivery_method.dart';
-import '../widgets/check_out/payment_component.dart';
-import '../widgets/check_out/shiping_address_component.dart';
-import '../widgets/loading_page.dart';
+import '../../widgets/check_out/check_out_order_details.dart';
+import '../../widgets/check_out/delivery_method.dart';
+import '../../widgets/check_out/payment_component.dart';
+import '../../widgets/loading_page.dart';
 
 class CheckOutPage extends StatefulWidget {
   const CheckOutPage({super.key});
@@ -106,7 +107,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       padding: EdgeInsets.symmetric(horizontal: 26.w),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(Routes.paymentMethodsPage);
+                    },
                     child: Text(
                       'Change',
                       style: TextStyles.font14DarkRedMedium,
@@ -123,7 +126,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
               ),
               verticalSpace(20.h),
               StreamBuilder<List<DeliveryMethodModel>>(
-                  stream: database.deliveryMethod(),
+                  stream: database.deliveryMethods(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.active) {
                       final data = snapshot.data;

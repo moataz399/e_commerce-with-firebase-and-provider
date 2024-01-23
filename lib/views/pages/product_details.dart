@@ -2,6 +2,7 @@ import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/models/add_to_cart_model.dart';
 import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/utils/constants/strings.dart';
+import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
@@ -149,7 +150,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                     buttonText: "ADD TO CART",
                     backgroundColor: AppColors.darkRed,
                     textStyle: TextStyles.font14WhiteMedium,
-                    onPressed: () => _addToCart(database),
+                    onPressed: () async {
+                      await _addToCart(database);
+                      context.pop();
+                    },
                   ),
                 ],
               ),

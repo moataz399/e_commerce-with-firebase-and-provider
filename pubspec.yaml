@@ -25,7 +25,7 @@ dependencies:
   pretty_dio_logger: ^1.3.1
   shared_preferences: ^2.2.2
   provider: ^6.1.1
-  get_it: ^7.6.6
+  get_it: ^7.6.7
   flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
@@ -37,7 +37,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/
     - lib/views/widgets/
     - lib/generated/
     - lib/views/widgets/check_out/

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/shipping_address_model.dart';
-import '../../utils/arguments/add_shipping_address_args.dart';
-import '../../utils/routing/routes.dart';
-import '../../utils/theming/text_styles.dart';
-import '../widgets/check_out/shipping_address_state_item.dart';
+import '../../../models/shipping_address_model.dart';
+import '../../../utils/arguments/add_shipping_address_args.dart';
+import '../../../utils/routing/routes.dart';
+import '../../../utils/theming/text_styles.dart';
+import '../../widgets/check_out/shipping_address_state_item.dart';
 
 class ShippingAddressesPage extends StatelessWidget {
   const ShippingAddressesPage({super.key});

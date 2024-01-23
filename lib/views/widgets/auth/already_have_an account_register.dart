@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/theming/text_styles.dart';
+import '../../../utils/theming/text_styles.dart';
 
-class AlreadyHaveAccountTextRegister extends StatelessWidget {
-  AlreadyHaveAccountTextRegister({super.key, required this.function});
+class AlreadyHaveAnAccountTextRegister extends StatelessWidget {
+  AlreadyHaveAnAccountTextRegister({super.key, required this.function});
 
   void Function() function;
 

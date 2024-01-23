@@ -1,16 +1,16 @@
 import 'package:e_commerce/controllers/auth_controller.dart';
 import 'package:e_commerce/utils/helpers/extensions.dart';
 import 'package:e_commerce/utils/theming/colors.dart';
-import 'package:e_commerce/views/widgets/already_have_an%20account_register.dart';
+import 'package:e_commerce/views/widgets/auth/already_have_an%20account_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../services/auth.dart';
-import '../../utils/helpers/spacing.dart';
-import '../../utils/routing/routes.dart';
-import '../../utils/theming/text_styles.dart';
-import '../widgets/app_text_button.dart';
-import '../widgets/app_text_form_field.dart';
+import '../../../services/auth.dart';
+import '../../../utils/helpers/spacing.dart';
+import '../../../utils/routing/routes.dart';
+import '../../../utils/theming/text_styles.dart';
+import '../../widgets/app_text_button.dart';
+import '../../widgets/app_text_form_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -144,7 +144,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                   ),
                   verticalSpace(16),
-                  Center(child: AlreadyHaveAccountTextRegister(function: () {
+                  Center(child: AlreadyHaveAnAccountTextRegister(function: () {
                     context.pop();
                   })),
                   SizedBox(

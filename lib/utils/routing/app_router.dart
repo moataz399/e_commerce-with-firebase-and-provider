@@ -2,16 +2,18 @@ import 'package:e_commerce/controllers/database_controller.dart';
 import 'package:e_commerce/utils/arguments/add_shipping_address_args.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/views/pages/bottom_navbar_page.dart';
-import 'package:e_commerce/views/pages/checkout_page.dart';
-import 'package:e_commerce/views/pages/landing_page.dart';
-import 'package:e_commerce/views/pages/login_page.dart';
+import 'package:e_commerce/views/pages/auth/landing_page.dart';
+import 'package:e_commerce/views/pages/checkout/checkout_page.dart';
+import 'package:e_commerce/views/pages/fav_page.dart';
 import 'package:e_commerce/views/pages/product_details.dart';
-import 'package:e_commerce/views/pages/register_page.dart';
-import 'package:e_commerce/views/pages/add_shipping_address_page.dart';
+import 'package:e_commerce/views/pages/auth/register_page.dart';
+import 'package:e_commerce/views/pages/checkout/add_shipping_address_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../views/pages/shipping_address_page.dart';
+import '../../views/pages/auth/login_page.dart';
+import '../../views/pages/checkout/payment_methods_page.dart';
+import '../../views/pages/checkout/shipping_address_page.dart';
 
 Route<dynamic> onGenerate(RouteSettings settings) {
   switch (settings.name) {
@@ -19,6 +21,22 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case Routes.landingPage:
       return MaterialPageRoute(
         builder: (_) => const LandingPage(),
+        settings: settings,
+      );
+
+    case Routes.paymentMethodsPage:
+      return MaterialPageRoute(
+        builder: (_) => const PaymentMethodsPage(),
+        settings: settings,
+      );
+    case Routes.profilePage:
+      return MaterialPageRoute(
+        builder: (_) => const PaymentMethodsPage(),
+        settings: settings,
+      );
+    case Routes.favPage:
+      return MaterialPageRoute(
+        builder: (_) => const FavoritesPage(),
         settings: settings,
       );
 

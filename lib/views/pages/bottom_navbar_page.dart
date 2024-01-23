@@ -1,7 +1,9 @@
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/pages/cart_page.dart';
+import 'package:e_commerce/views/pages/fav_page.dart';
 import 'package:e_commerce/views/pages/home_page.dart';
+import 'package:e_commerce/views/pages/profile_page.dart';
 import 'package:e_commerce/views/widgets/app_text_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +12,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';
+import '../../utils/theming/colors.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({super.key});
@@ -24,59 +27,47 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   List<Widget> _buildScreens() {
     return [
-      const CartPage(),
       Provider<Database>(
           create: (_) =>
               FireStoreDatabase(FirebaseAuth.instance.currentUser!.uid),
           child: const HomePage()),
       Container(),
-      Container(),
-      Scaffold(
-        body: Center(
-          child: AppTextButton(
-            buttonText: "logout",
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  Routes.landingPage, (route) => false);
-            },
-            textStyle: TextStyles.font16WhiteSemiBold,
-          ),
-        ),
-      ),
+      const CartPage(),
+      const FavoritesPage(),
+      const ProfilePage(),
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
+        icon: const Icon(CupertinoIcons.home),
         title: "Home",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.darkRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.bag),
+        icon: const Icon(CupertinoIcons.bag),
         title: "Shop",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.darkRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.shopping_cart),
+        icon: const Icon(CupertinoIcons.shopping_cart),
         title: "Cart",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.darkRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.favorite_border),
+        icon: const Icon(Icons.favorite_border),
         title: "Favorities",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.darkRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.profile_circled),
+        icon: const Icon(CupertinoIcons.profile_circled),
         title: "Profile",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.darkRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];
@@ -107,12 +98,12 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
         ),
         popAllScreensOnTapOfSelectedTab: true,
         popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: ItemAnimationProperties(
+        itemAnimationProperties: const ItemAnimationProperties(
           // Navigation Bar's items animation properties.
           duration: Duration(milliseconds: 200),
           curve: Curves.ease,
         ),
-        screenTransitionAnimation: ScreenTransitionAnimation(
+        screenTransitionAnimation: const ScreenTransitionAnimation(
           // Screen transition animation on change of selected tab.
           animateTabTransition: true,
           curve: Curves.ease,

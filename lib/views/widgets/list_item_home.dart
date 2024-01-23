@@ -85,10 +85,9 @@ class ListItemHome extends StatelessWidget {
                     radius: 20.0,
                     child: InkWell(
                       onTap: () {
-                        debugPrint('tapped');
-                        debugPrint(product.rate.toString());
+                        database.addToFav(product);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.favorite,
                         size: 20.0,
                         color: Colors.red,

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BigText extends StatelessWidget {
   final String text;
@@ -22,11 +23,10 @@ class BigText extends StatelessWidget {
       text,
       maxLines: 1,
       style: TextStyle(
-
           color: color,
-          fontSize: size,
+          fontSize: size!.sp,
           overflow: textOverflow,
-          fontWeight: FontWeight.bold),
+          fontWeight: FontWeight.w700),
     );
   }
 }
