@@ -5,6 +5,7 @@ class Product {
   final String title;
   final String imgUrl;
   final String category;
+  final String? size;
   final int price;
   final int? discountValue;
   final int? rate;
@@ -16,6 +17,7 @@ class Product {
       this.category = "other",
       required this.price,
       this.discountValue,
+      this.size,
       this.rate});
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,7 @@ class Product {
       'discountValue': discountValue,
       'category': category,
       'rate': rate,
+      "size": size,
     };
   }
 
@@ -34,6 +37,7 @@ class Product {
     return Product(
       id: documentId,
       title: map['title'] as String,
+      size: map['size'] ?? "",
       price: map['price'] as int,
       imgUrl: map['imgUrl'] as String,
       discountValue: map['discountValue'] as int,

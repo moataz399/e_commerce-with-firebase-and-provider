@@ -16,8 +16,9 @@ import '../widgets/drop_down_menu.dart';
 
 class ProductDetails extends StatefulWidget {
   final Product product;
+  bool isCart;
 
-  const ProductDetails({super.key, required this.product});
+  ProductDetails({super.key, required this.product, required this.isCart});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -83,20 +84,36 @@ class _ProductDetailsState extends State<ProductDetails> {
                 children: [
                   Row(
                     children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 60,
-                          child: DropDownMenuComponent(
-                            items: const ['S', 'M', 'L', 'XL', 'XXL'],
-                            hint: 'Size',
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownValue = newValue!;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
+                      widget.isCart
+                          ? RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Size: ',
+                                    style: TextStyles.font18BlackRegular,
+                                  ),
+                                  TextSpan(
+                                    text: widget.product.size,
+                                    style: TextStyles.font18BlackRegular,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Expanded(
+                              child: SizedBox(
+                                height: 60,
+                                child: DropDownMenuComponent(
+                                  items: const ['S', 'M', 'L', 'XL', 'XXL'],
+                                  hint: "Size",
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownValue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
                       const Spacer(),
                       InkWell(
                         onTap: () {
@@ -146,15 +163,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                   verticalSpace(20),
-                  AppTextButton(
-                    buttonText: "ADD TO CART",
-                    backgroundColor: AppColors.darkRed,
-                    textStyle: TextStyles.font14WhiteMedium,
-                    onPressed: () async {
-                      await _addToCart(database);
-                      context.pop();
-                    },
-                  ),
+                  if (widget.isCart == true)
+                    Container()
+                  else
+                    AppTextButton(
+                      buttonText: "ADD TO CART",
+                      backgroundColor: AppColors.darkRed,
+                      textStyle: TextStyles.font14WhiteMedium,
+                      onPressed: () async {
+                        await _addToCart(database);
+                        context.pop();
+                      },
+                    )
                 ],
               ),
             )

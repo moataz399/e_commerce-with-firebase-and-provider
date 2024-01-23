@@ -21,9 +21,12 @@ class ListItemHome extends StatelessWidget {
     final database = Provider.of<Database>(context);
     return InkWell(
       onTap: () {
-        Navigator.of(context, rootNavigator: true).pushNamed(
-            Routes.productDetails,
-            arguments: {"product": product, "database": database});
+        Navigator.of(context, rootNavigator: true)
+            .pushNamed(Routes.productDetails, arguments: {
+          "product": product,
+          "database": database,
+          "isCart": false
+        });
       },
       child: DecoratedBox(
         decoration: const BoxDecoration(),

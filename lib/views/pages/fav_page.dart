@@ -1,3 +1,4 @@
+import 'package:e_commerce/models/add_to_cart_model.dart';
 import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/utils/constants/strings.dart';
 import 'package:e_commerce/utils/helpers/spacing.dart';
@@ -25,33 +26,44 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     final database = Provider.of<Database>(context);
     return SafeArea(
-      child: StreamBuilder<List<Product>>(
-          stream: database.myFavProducts(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              var favItems = snapshot.data;
-              if (favItems == null || favItems.isEmpty) {
-                return Text('');
-              }
-              return SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BigText(
-                        text: "Favorites",
-                        size: 34.sp,
-                        color: Colors.black,
-                      ),
-                      verticalSpace(32),
-                      ListView.builder(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BigText(
+                text: "Favorites",
+                size: 34.sp,
+                color: Colors.black,
+              ),
+              verticalSpace(32),
+              StreamBuilder<List<Product>>(
+                  stream: database.myFavProducts(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      var favItems = snapshot.data;
+                      if (favItems == null || favItems.isEmpty) {
+                        return Center(
+                          child: Container(
+                            height: 400.h,
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images/fav2.png"),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
                         itemCount: favItems.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) => Dismissible(
-                          onDismissed: (DismissDirection direction) async {},
+                          onDismissed: (DismissDirection direction) async {
+                            await database.deleteFavItem(favItems[index]);
+                          },
                           key: UniqueKey(),
                           child: Stack(
                             alignment: Alignment.bottomRight,
@@ -216,7 +228,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                             color: Colors.grey,
                                           ),
                                           onTap: () async {
-                                            //  await database.deleteItem(model);
+                                            await database
+                                                .deleteFavItem(favItems[index]);
                                           },
                                         ),
                                       ),
@@ -224,27 +237,38 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                child: CircleAvatar(
-                                  backgroundColor: AppColors.darkRed,
-                                  child: Center(
-                                      child: Icon(
-                                    Icons.shopping_bag_rounded,
-                                    color: Colors.white,
-                                  )),
+                              InkWell(
+                                onTap: () async {
+                                  await database.addToCart(AddToCartModel(
+                                      id: documentIdFromLocalData(),
+                                      productId: favItems[index].id,
+                                      title: favItems[index].title,
+                                      imgUrl: favItems[index].imgUrl,
+                                      price: favItems[index].price,
+                                      size: ''));
+                                },
+                                child: const SizedBox(
+                                  child: CircleAvatar(
+                                    backgroundColor: AppColors.darkRed,
+                                    child: Center(
+                                        child: Icon(
+                                      Icons.shopping_bag_rounded,
+                                      color: Colors.white,
+                                    )),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }
-            return LoadingPage();
-          }),
+                      );
+                    }
+                    return const LoadingPage();
+                  }),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

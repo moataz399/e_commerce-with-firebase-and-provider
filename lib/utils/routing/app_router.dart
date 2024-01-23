@@ -60,12 +60,14 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       final args = settings.arguments as Map<String, dynamic>;
       final product = args["product"];
       final database = args["database"];
+      final bool isCart = args["isCart"];
       return MaterialPageRoute(
         settings: settings,
         builder: (_) => Provider<Database>.value(
           value: database,
           child: ProductDetails(
             product: product,
+            isCart: isCart,
           ),
         ),
       );

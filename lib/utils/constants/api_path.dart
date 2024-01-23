@@ -12,7 +12,7 @@ class ApiPath {
   static String deleteCartItem(String uId, String documentId) =>
       "users/$uId/cart/$documentId";
   static String deleteFavItem(String uId, String documentId) =>
-      "users/$uId/cart/$documentId";
+      "users/$uId/favorites/$documentId";
 
   static String myCart({required String uId, String? docUid}) =>
       "users/$uId/cart/";

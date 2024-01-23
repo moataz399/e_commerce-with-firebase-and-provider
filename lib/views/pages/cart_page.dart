@@ -62,12 +62,16 @@ class _CartPageState extends State<CartPage> {
                           size: 34,
                         ),
                         if (cartItems.isEmpty)
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 16.0.h,
-                            ),
-                            child: const Center(
-                              child: Text("no data available"),
+                          Center(
+                            child: Container(
+                              height: 400.h,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage("assets/images/cart2.png"),
+                                    fit: BoxFit.cover),
+                              ),
                             ),
                           ),
                         if (cartItems.isNotEmpty)

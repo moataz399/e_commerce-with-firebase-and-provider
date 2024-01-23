@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     final dataBase = Provider.of<Database>(context);
     return SingleChildScrollView(
       child: Column(
@@ -63,8 +62,7 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     InkWell(
-                      onTap: () {
-                      },
+                      onTap: () {},
                       child: Text("View all ",
                           style: TextStyles.font11greySemiBold.copyWith(
                             color: const Color(0xFF222222),
@@ -99,9 +97,10 @@ class HomePage extends StatelessWidget {
                           );
                         }
                         return const Center(
-                            child: CircularProgressIndicator(
-                          color: Colors.red,
-                        ));
+                          child: CircularProgressIndicator(
+                            color: Colors.red,
+                          ),
+                        );
                       }),
                 ),
               ],

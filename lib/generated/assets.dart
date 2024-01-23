@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String argumentsAddShippingAddressArgs = 'lib/utils/arguments/add_shipping_address_args.dart';
+  static const String authAlreadyHaveAnAccountRegister = 'lib/views/widgets/auth/already_have_an_account_register.dart';
   static const String authDontHaveAnAccount = 'lib/views/widgets/auth/dont_have_an_account.dart';
   static const String authLandingPage = 'lib/views/pages/auth/landing_page.dart';
   static const String authLoginPage = 'lib/views/pages/auth/login_page.dart';
@@ -29,9 +30,15 @@ class Assets {
   static const String helpersExtensions = 'lib/utils/helpers/extensions.dart';
   static const String helpersSpacing = 'lib/utils/helpers/spacing.dart';
   static const String imagesCard = 'assets/images/card.jpeg';
+  static const String imagesCart = 'assets/images/cart.png';
+  static const String imagesCart2 = 'assets/images/cart2.png';
+  static const String imagesFav = 'assets/images/fav.png';
+  static const String imagesFav2 = 'assets/images/fav2.png';
   static const String imagesFedex = 'assets/images/fedex.png';
   static const String imagesMasterCard = 'assets/images/master_card.jpg';
   static const String imagesProfile = 'assets/images/profile.jpg';
+  static const String imagesShop = 'assets/images/shop.png';
+  static const String imagesShop2 = 'assets/images/shop2.png';
   static const String libMain = 'lib/main.dart';
   static const String modelsAddToCartModel = 'lib/models/add_to_cart_model.dart';
   static const String modelsDeliveryMethod = 'lib/models/delivery_method.dart';

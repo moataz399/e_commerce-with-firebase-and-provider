@@ -1,13 +1,11 @@
-import 'package:e_commerce/utils/routing/routes.dart';
-import 'package:e_commerce/utils/theming/text_styles.dart';
 import 'package:e_commerce/views/pages/cart_page.dart';
 import 'package:e_commerce/views/pages/fav_page.dart';
 import 'package:e_commerce/views/pages/home_page.dart';
 import 'package:e_commerce/views/pages/profile_page.dart';
-import 'package:e_commerce/views/widgets/app_text_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +29,17 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
           create: (_) =>
               FireStoreDatabase(FirebaseAuth.instance.currentUser!.uid),
           child: const HomePage()),
-      Container(),
+      Center(
+        child: Container(
+          height: 400.h,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/shop2.png"),
+                fit: BoxFit.cover),
+          ),
+        ),
+      ),
       const CartPage(),
       const FavoritesPage(),
       const ProfilePage(),
