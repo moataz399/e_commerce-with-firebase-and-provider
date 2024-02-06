@@ -3,6 +3,9 @@ import 'package:e_commerce/utils/arguments/add_shipping_address_args.dart';
 import 'package:e_commerce/utils/routing/routes.dart';
 import 'package:e_commerce/views/pages/bottom_navbar_page.dart';
 import 'package:e_commerce/views/pages/auth/landing_page.dart';
+import 'package:e_commerce/views/pages/chat/chat_page.dart';
+import 'package:e_commerce/views/pages/chat/chat_page2.dart';
+import 'package:e_commerce/views/pages/chat/test_page.dart';
 import 'package:e_commerce/views/pages/checkout/checkout_page.dart';
 import 'package:e_commerce/views/pages/fav_page.dart';
 import 'package:e_commerce/views/pages/product_details.dart';
@@ -21,6 +24,19 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case Routes.landingPage:
       return MaterialPageRoute(
         builder: (_) => const LandingPage(),
+        settings: settings,
+      );case Routes.test:
+      return MaterialPageRoute(
+        builder: (_) => const TestPage(),
+        settings: settings,
+      );
+    case Routes.chatPage:
+      return MaterialPageRoute(
+        builder: (_) => const ChatPage(),
+        settings: settings,
+      );case Routes.chatPage2:
+      return MaterialPageRoute(
+        builder: (_) => const ChatPage2(),
         settings: settings,
       );
 

@@ -15,3 +15,6 @@ class AppStrings{
 
 }
 String documentIdFromLocalData()=> DateTime.now().toIso8601String();
+
+
+ List messages = [];

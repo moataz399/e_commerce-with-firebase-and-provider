@@ -27,6 +27,7 @@ dependencies:
   provider: ^6.1.1
   get_it: ^7.6.7
   flutter_rating_bar: ^4.0.1
+  chat_bubbles: ^1.6.0
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +40,6 @@ flutter:
   assets:
     - assets/images/
     - lib/views/widgets/
-    - lib/generated/
     - lib/views/widgets/check_out/
 
 

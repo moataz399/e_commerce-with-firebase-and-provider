@@ -9,6 +9,9 @@ class Routes {
   static const String paymentMethodsPage = '/paymentMethodsPage';
   static const String shippingAddressesPage = '/shippingAddressesPage';
   static const String profilePage = '/profile';
+  static const String chatPage = '/chatPage';
+  static const String chatPage2 = '/chatPage2';
+  static const String test = '/test';
   static const String favPage = '/favPage';
   static const String addShippingAddressPage =
       '/checkOut/addShippingAddressPage';
